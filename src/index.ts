@@ -1,6 +1,7 @@
 import "./lib/db";
 import express from "express";
 import countryRoutes from "./routes/country";
+import { alfanumeric } from './generateID';
 
 const app = express();
 const port = process.env.PORT || 3333;
@@ -17,6 +18,21 @@ app.get("/", async (req, res) => {
 app.get('/users/:userId', (req, res) => {
   const userId = req.params.userId;
   res.send(`User ID: ${userId}`);
+});
+
+app.get("/register", async (req, res) => {
+  let id = alfanumeric(5);
+  if(id in data){
+    id = alfanumeric(5);
+  }
+  data[id] = {
+    "PcName": `nombre de pc${id}`,
+    "IdPc": id,
+    "publicURL": "publicurl.com"
+  };
+  // Guardar los cambios en el archivo JSON
+  fs.writeFileSync('./pcs.json', JSON.stringify(data));
+  res.json({ id: id });
 });
 
 app.use("/countries", countryRoutes);
