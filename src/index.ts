@@ -13,6 +13,12 @@ app.get("/", async (req, res) => {
   res.json({ message: "Please visit /countries to view all the countries" });
 });
 
+
+app.get('/users/:userId', (req, res) => {
+  const userId = req.params.userId;
+  res.send(`User ID: ${userId}`);
+});
+
 app.use("/countries", countryRoutes);
 
 app.listen(port, () => {
