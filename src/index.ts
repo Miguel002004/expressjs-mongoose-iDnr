@@ -2,6 +2,11 @@ import "./lib/db";
 import express from "express";
 import countryRoutes from "./routes/country";
 import { alfanumeric } from './generateID';
+import * as fs from 'fs';
+
+
+const rawData = fs.readFileSync('./pcs.json');
+const data = JSON.parse(rawData.toString());
 
 const app = express();
 const port = process.env.PORT || 3333;
