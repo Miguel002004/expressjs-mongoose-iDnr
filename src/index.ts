@@ -20,9 +20,14 @@ app.get("/", async (req, res) => {
 });
 
 
-app.get('/users/:userId', (req, res) => {
+app.get('/userInfo/:userId', (req, res) => {
   const userId = req.params.userId;
-  res.send(`User ID: ${userId}`);
+  if(userId in data){
+    res.json(data[userId]);
+  }
+  else{
+    res.send(`false`);
+  }
 });
 
 app.get("/register", async (req, res) => {
@@ -38,6 +43,10 @@ app.get("/register", async (req, res) => {
   // Guardar los cambios en el archivo JSON
   fs.writeFileSync('./pcs.json', JSON.stringify(data));
   res.json({ id: id });
+});
+
+app.get('/getAllUsers', (req, res) => {
+  res.json(data);
 });
 
 app.use("/countries", countryRoutes);
