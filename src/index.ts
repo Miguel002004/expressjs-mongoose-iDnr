@@ -7,7 +7,6 @@ import * as fs from 'fs';
 
 const rawData = fs.readFileSync('./pcs.json');
 const data = JSON.parse(rawData.toString());
-
 const app = express();
 const port = process.env.PORT || 3333;
 
@@ -39,7 +38,6 @@ app.get("/register", async (req, res) => {
   fs.writeFileSync('./pcs.json', JSON.stringify(data));
   res.json({ id: id });
 });
-
 
 app.use("/countries", countryRoutes);
 
