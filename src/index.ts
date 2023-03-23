@@ -20,14 +20,9 @@ app.get("/", async (req, res) => {
 });
 
 
-app.get('/userInfo/:userId', (req, res) => {
+app.get('/users/:userId', (req, res) => {
   const userId = req.params.userId;
-  if(userId in data){
-    res.json(data[userId]);
-  }
-  else{
-    res.send(`false`);
-  }
+  res.send(`User ID: ${userId}`);
 });
 
 app.get("/register", async (req, res) => {
@@ -45,9 +40,6 @@ app.get("/register", async (req, res) => {
   res.json({ id: id });
 });
 
-app.get('/getAllUsers', (req, res) => {
-  res.json(data);
-});
 
 app.use("/countries", countryRoutes);
 
